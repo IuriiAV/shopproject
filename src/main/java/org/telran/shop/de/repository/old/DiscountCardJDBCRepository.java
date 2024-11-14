@@ -1,14 +1,14 @@
-package org.telran.shop.de.repository;
+package org.telran.shop.de.repository.old;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.telran.shop.de.model.DiscountCard;
+import org.telran.shop.de.entity.DiscountCard;
 
 import java.util.List;
 
-@Repository("dcrepository")
+//@Repository("dcrepository")
 @Deprecated
 public class DiscountCardJDBCRepository implements DiscountCardRepository {
 

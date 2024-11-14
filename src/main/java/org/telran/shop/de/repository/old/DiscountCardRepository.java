@@ -1,9 +1,10 @@
-package org.telran.shop.de.repository;
+package org.telran.shop.de.repository.old;
 
-import org.telran.shop.de.model.DiscountCard;
+import org.telran.shop.de.entity.DiscountCard;
 
 import java.util.List;
 
+@Deprecated
 public interface DiscountCardRepository {
 
     List<DiscountCard> getAll();

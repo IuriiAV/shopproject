@@ -1,6 +1,6 @@
-package org.telran.shop.de.repository;
+package org.telran.shop.de.repository.old;
 
-import org.telran.shop.de.model.Product;
+import org.telran.shop.de.entity.Product;
 
 import java.util.List;
 

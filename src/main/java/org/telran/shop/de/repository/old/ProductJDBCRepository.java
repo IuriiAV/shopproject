@@ -1,11 +1,11 @@
-package org.telran.shop.de.repository;
+package org.telran.shop.de.repository.old;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.telran.shop.de.configuraton.DataBaseManager;
 import org.telran.shop.de.enums.ProductType;
-import org.telran.shop.de.model.Product;
+import org.telran.shop.de.entity.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,8 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@Primary
+//@Component
+//@Primary
 @Deprecated
 public class ProductJDBCRepository implements ProductRepository {
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-@Component
+//@Component
 @Deprecated
 public class DataBaseManager {
 

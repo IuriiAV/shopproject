@@ -8,6 +8,7 @@ package org.telran.shop.de.entity;
 //Spring Data JPA - набор интерфейсов для доступа к базе данных
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +21,27 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // авто увеличение поля
     private Long id;
 
+    @NotNull
+    @NotBlank
     @Column(name = "login") // нет необходимости здесь
     private String login;
 
+   // @Pattern()
     private String password;
 
+    @Email
     private String email;
 
     private String userInfo;  // user_info
 
+    //@Min(18)
+    //@Max(65)
+   // @Pattern()
+
     @Column(name = "description") // явное задание колонки для маппинга
     private String information;
 
+   // @NotEmpty
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id") // вот эта колонка будет создана в таблице адресов
     private List<Address> addresses = new ArrayList<>();
@@ -43,6 +53,11 @@ public class User {
 
     public User() {
         //
+    }
+
+    public User(String login, String email) {
+        this.login = login;
+        this.email = email;
     }
 
     public Long getId() {

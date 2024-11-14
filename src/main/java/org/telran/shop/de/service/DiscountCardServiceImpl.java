@@ -1,19 +1,21 @@
 package org.telran.shop.de.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.telran.shop.de.model.DiscountCard;
-import org.telran.shop.de.repository.DiscountCardRepository;
+import org.telran.shop.de.entity.DiscountCard;
+import org.telran.shop.de.repository.DiscountCardJpaRepository;
 
 import java.util.List;
 
 @Service
 public class DiscountCardServiceImpl implements DiscountCardService {
 
-    @Autowired
-    @Qualifier("dcrepository")
-    private DiscountCardRepository repository;
+     @Autowired
+     private DiscountCardJpaRepository repository;
+
+//    @Autowired
+//    @Qualifier("dcrepository")
+//    private DiscountCardRepository repository;
 
 //    @Autowired
 //    @Qualifier("discountCardInMemoryRepository")
@@ -21,12 +23,12 @@ public class DiscountCardServiceImpl implements DiscountCardService {
 
     @Override
     public List<DiscountCard> getAll() {
-        return repository.getAll();
+        return repository.findAll();
     }
 
     @Override
     public DiscountCard create(DiscountCard card) {
-        return repository.create(card);
+        return repository.save(card);
     }
 
     @Override
@@ -41,7 +43,9 @@ public class DiscountCardServiceImpl implements DiscountCardService {
 
     @Override
     public void setExpired(String id) {
-        repository.setExpired(id);
+        DiscountCard entity = getById(id);
+        entity.setExpired(true);
+        repository.save(entity);
     }
 
     @Override

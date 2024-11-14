@@ -1,7 +1,12 @@
-package org.telran.shop.de.model;
+package org.telran.shop.de.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "dicount_cards")
 public class DiscountCard {
 
+    @Id // данное поле является первичным ключом (NOT NULL + UNIQUE )
     private String id;
 
     private boolean expired;

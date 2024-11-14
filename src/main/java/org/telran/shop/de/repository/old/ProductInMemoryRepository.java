@@ -1,13 +1,13 @@
-package org.telran.shop.de.repository;
+package org.telran.shop.de.repository.old;
 
 import org.springframework.stereotype.Component;
 import org.telran.shop.de.enums.ProductType;
-import org.telran.shop.de.model.Product;
+import org.telran.shop.de.entity.Product;
 
 import java.util.Arrays;
 import java.util.List;
 
-@Component
+//@Component
 @Deprecated
 public class ProductInMemoryRepository implements ProductRepository {
 

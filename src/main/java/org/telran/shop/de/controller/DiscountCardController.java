@@ -2,11 +2,9 @@ package org.telran.shop.de.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.telran.shop.de.configuraton.DataBaseManager;
-import org.telran.shop.de.model.DiscountCard;
+import org.telran.shop.de.entity.DiscountCard;
 import org.telran.shop.de.service.DiscountCardService;
 
-import java.sql.Connection;
 import java.util.List;
 
 //HTTP

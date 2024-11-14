@@ -9,7 +9,7 @@ import org.telran.shop.de.repository.UserJpaRepository;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserJpaRepository jpaRepository;

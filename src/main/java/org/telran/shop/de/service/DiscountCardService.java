@@ -1,6 +1,6 @@
 package org.telran.shop.de.service;
 
-import org.telran.shop.de.model.DiscountCard;
+import org.telran.shop.de.entity.DiscountCard;
 
 import java.util.List;
 
