@@ -5,6 +5,7 @@ import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,6 +15,9 @@ import org.telran.shop.de.dto.UserCreateDto;
 import org.telran.shop.de.dto.UserResponseDto;
 import org.telran.shop.de.entity.User;
 import org.telran.shop.de.exception.UserNotFoundException;
+import org.telran.shop.de.security.AuthenticationService;
+import org.telran.shop.de.security.model.JwtAuthenticationResponse;
+import org.telran.shop.de.security.model.SignInRequest;
 import org.telran.shop.de.service.UserService;
 
 import java.util.HashMap;
@@ -31,6 +35,12 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AuthenticationService authenticationService;
+
+    @Autowired
     private Converter<User, UserCreateDto, UserResponseDto> createConverter;
 
     @GetMapping
@@ -41,9 +51,15 @@ public class UserController {
     @PostMapping
     public UserResponseDto create(@RequestBody @Valid UserCreateDto userDto) {
         User user = createConverter.toEntity(userDto);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User userFromDatabase = userService.create(user);
         UserResponseDto dto = createConverter.toDto(userFromDatabase);
         return dto;
+    }
+
+    @PostMapping("/login")
+    public JwtAuthenticationResponse login(@RequestBody SignInRequest request) {
+        return authenticationService.authenticate(request);
     }
 
     @GetMapping("/{id}")
