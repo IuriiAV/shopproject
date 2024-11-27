@@ -1,6 +1,8 @@
 package org.telran.shop.de.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.telran.shop.de.entity.User;
 import org.telran.shop.de.exception.UserNotFoundException;
@@ -44,5 +46,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         jpaRepository.deleteById(id);
+    }
+
+    @Override
+    public String getCurrentUserName() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            return authentication.getName();
+        }
+        return null;
+    }
+
+    @Override
+    public Long getCurrentUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            String name = authentication.getName();
+            User userEntity = getByName(name);
+            return userEntity.getId();
+        }
+        return null;
     }
 }

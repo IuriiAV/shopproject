@@ -9,6 +9,7 @@ package org.telran.shop.de.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.telran.shop.de.enums.Role;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,9 @@ public class User {
     private String email;
 
     private String userInfo;  // user_info
+
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.ROLE_USER;
 
     //@Min(18)
     //@Max(65)
@@ -128,5 +132,13 @@ public class User {
 
     public void setPassport(Passport passport) {
         this.passport = passport;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

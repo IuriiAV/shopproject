@@ -31,7 +31,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
                 userEntity.getLogin(),
                 //$2a$10$WaAxUBls1cW5ApFelaAAP.x9NUWJnaYBu7CcVDNbvpcVwnu/qCY.i
                 userEntity.getPassword(), // BCrypt
-                List.of(new SimpleGrantedAuthority("USER")));
+                List.of(new SimpleGrantedAuthority(userEntity.getRole().name())));
 
 
         return user;

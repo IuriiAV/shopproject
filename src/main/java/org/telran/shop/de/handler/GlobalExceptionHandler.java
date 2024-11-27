@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.telran.shop.de.exception.CardNotFoundException;
 import org.telran.shop.de.exception.ProductNotFoundException;
 import org.telran.shop.de.exception.UserNotFoundException;
 
@@ -21,7 +22,9 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({UserNotFoundException.class, ProductNotFoundException.class})
+    @ExceptionHandler({UserNotFoundException.class,
+            ProductNotFoundException.class,
+            CardNotFoundException.class})
     public ResponseEntity<Object> handleNotFoundExceptions(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }

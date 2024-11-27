@@ -3,9 +3,11 @@ package org.telran.shop.de.configuraton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -18,6 +20,7 @@ import org.telran.shop.de.security.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+//@EnableMethodSecurity // @PreAuthorize
 public class SecurityConfig {
 
     @Autowired
@@ -28,7 +31,12 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/discountcards").authenticated()
+                        // /** - действие секьюрити и после указанного урл - в глубь
+//                        .requestMatchers("/api/discountcards/**").authenticated()
+//                        .requestMatchers(HttpMethod.GET,"/api/users").authenticated()
+//                        .requestMatchers(HttpMethod.POST,"/api/users").permitAll()
+//                        .requestMatchers("/api/products").hasRole("ADMIN")
+//                        .requestMatchers("/api/addresses/**").authenticated()
                         .anyRequest().permitAll())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

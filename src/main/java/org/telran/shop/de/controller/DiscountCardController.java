@@ -1,6 +1,7 @@
 package org.telran.shop.de.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.telran.shop.de.entity.DiscountCard;
 import org.telran.shop.de.service.DiscountCardService;
@@ -55,9 +56,12 @@ public class DiscountCardController {
 //    @Autowired
 //    private DataBaseManager dataBaseManager;
 
+
     //GET http://localhost:8080/api/discountcards
     @GetMapping  // DispatcherServlet - в этот метод передаст GET запрос
     // по адресу этого контроллера
+    @PreAuthorize("hasRole('ADMIN')")  // when role start with ROLE_
+    //@PreAuthorize("hasAuthority('ADMIN')") // when role without ROLE_
     public List<DiscountCard> getAll() {
         //Connection connection = dataBaseManager.getConnection();
         return cardService.getAll();
@@ -73,6 +77,8 @@ public class DiscountCardController {
     //Параметры адресной строки доступны всем!!! Не нужно передавать логины и пароли тут
     //@PathVariable - взятие параметра из адресной строки
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public DiscountCard getById(@PathVariable(name = "id") String id) {
         return cardService.getById(id);
     }
