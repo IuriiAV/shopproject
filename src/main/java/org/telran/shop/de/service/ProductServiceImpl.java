@@ -1,5 +1,7 @@
 package org.telran.shop.de.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telran.shop.de.entity.Product;
@@ -10,6 +12,9 @@ import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+
+    private Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
+
 
     @Autowired
     private ProductJpaRepository productRepository;
@@ -30,6 +35,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getByTitle(String title) {
+        log.debug("Title for search {}", title);
         List<Product> products = productRepository.findAllByTitle(title);
         if (products.isEmpty()) {
             throw new ProductNotFoundException("Product with title " +

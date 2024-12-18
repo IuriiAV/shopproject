@@ -1,5 +1,7 @@
 package org.telran.shop.de.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +14,8 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserJpaRepository jpaRepository;
@@ -30,11 +34,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         User userEntity = jpaRepository.save(user);
+        log.debug("User {}", userEntity);
         return userEntity;
     }
 
     @Override
     public User getByName(String name) {
+        log.info("Method start");
         return jpaRepository.findByLogin(name);
     }
 
@@ -43,6 +49,10 @@ public class UserServiceImpl implements UserService {
         return jpaRepository.findAllByPassword(password);
     }
 
+    /**
+     *
+     * @param id
+     */
     @Override
     public void delete(Long id) {
         jpaRepository.deleteById(id);
